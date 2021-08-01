@@ -1,6 +1,5 @@
 import React from 'react';
 import {Modal, StyleProp, View, ViewStyle} from 'react-native';
-// import {TextLoader, BubblesLoader} from 'react-native-indicator';
 import {BallIndicator} from 'react-native-indicators';
 import {colors} from '../../styles';
 
@@ -25,7 +24,6 @@ const Loading: React.FC<LoadingProps> = ({loading, loadingViewStyle}) => {
             right: 0,
             bottom: 0,
             justifyContent: 'center',
-            // alignItems: 'center',
           },
           loadingViewStyle,
         ]}>

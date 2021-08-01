@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
+import {color} from 'react-native-reanimated';
 import {Separator} from '../../../components';
 import {colors, fontStyles} from '../../../styles';
 
@@ -32,7 +33,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
               marginLeft: 10,
               width: 48,
               height: 48,
-              backgroundColor: '#e8e8e8',
+              backgroundColor: colors.appColors.imageBack,
               borderRadius: 100,
               marginRight: 20,
             }}>

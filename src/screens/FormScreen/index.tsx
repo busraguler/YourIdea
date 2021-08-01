@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {DrawerScreenType} from '../../navigation/Router/routes';
 import SafeAreaView from 'react-native-safe-area-view';
 import {
@@ -12,6 +12,7 @@ import {
 } from '../../components';
 import fontStyles from '../../styles/fontStyles';
 import NavigationHeader from '../../navigation/NavigationHeader';
+import {colors} from '../../styles';
 
 const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
   const [name, setName] = useState('');
@@ -65,18 +66,17 @@ const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.appColors.white}}>
       <ScrollView>
         <NavigationHeader
           isLeftIcon={true}
           onPressLeftIcon={() => navigation.navigate('Home')}
           title={'Form'}
           isRightIcon={true}
-          onPressRigthIcon={() => navigation.navigate('Home')}
+          onPressRightIcon={() => navigation.navigate('Home')}
         />
         <MainScreenView style={styles.container}>
           <ScreenContentHeaderText title={'Düşüncelerinizi İletin'} />
-          <Separator marginBottom={40} hasHeight={false} />
 
           <Card>
             <View style={styles.description}>

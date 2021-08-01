@@ -1,15 +1,12 @@
 import React from 'react';
-import {StyleSheet, View,ViewProps,Text} from 'react-native';
+import {StyleSheet, View, ViewProps} from 'react-native';
 import colors from '../../styles/colors';
 
 interface CardProps extends ViewProps {}
 
 const Card: React.FC<CardProps> = props => {
   return (
-    <View
-      {...props}
-      style={[styles.container,props.style]}
-    >
+    <View {...props} style={[styles.container, props.style]}>
       {props.children}
     </View>
   );

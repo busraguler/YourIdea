@@ -1,28 +1,21 @@
 import React from 'react';
 import {StyleSheet, View, ViewProps, Text} from 'react-native';
-import { fontStyles } from '../../styles';
-import { Separator} from '../../components';
+import {fontStyles} from '../../styles';
+import {Separator} from '../../components';
 
 interface ScreenContentHeaderTextProps extends ViewProps {
-  title?:string;
+  title?: string;
 }
 const ScreenContentHeaderText: React.FC<ScreenContentHeaderTextProps> = ({
-  title
+  title,
 }) => {
   return (
     <>
-      <Separator
-        hasHeight={false}
-        marginTop={34}
-        marginBottom={34}
-      />
+      <Separator hasHeight={false} marginTop={30} marginBottom={20} />
       <View style={styles.container}>
         <Text style={styles.pageHeader}>{title}</Text>
       </View>
-      <Separator
-        hasHeight={false}
-        marginBottom={20}
-      />
+      <Separator hasHeight={false} marginBottom={60} />
     </>
   );
 };
@@ -34,9 +27,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
   },
-  pageHeader:{
-    ...fontStyles.pageHeader
-  }
+  pageHeader: {
+    ...fontStyles.pageHeader,
+  },
 });

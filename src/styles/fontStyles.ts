@@ -39,8 +39,8 @@ const fontStyles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     marginBottom: 40,
   },
   subtitleText: {

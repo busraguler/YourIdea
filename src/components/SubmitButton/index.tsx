@@ -7,8 +7,9 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
+import {colors} from '../../styles';
 import fontStyles from '../../styles/fontStyles';
 
 const SubmitButton: React.FunctionComponent<{
@@ -28,8 +29,7 @@ const SubmitButton: React.FunctionComponent<{
     <TouchableOpacity
       style={touchableStyles}
       activeOpacity={0.7}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       <View style={[styles.buttonContainer, buttonStyles]}>
         <Text style={[styles.buttonText, textStyles]}>{text}</Text>
       </View>
@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#1e309d',
+    backgroundColor: colors.appColors.buttonColor,
     minHeight: 50,
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: colors.appColors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    
   },
   buttonText: {
     ...fontStyles.buttonText,

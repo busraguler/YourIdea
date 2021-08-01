@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {DrawerScreenType} from '../../navigation/Router/routes';
 import SafeAreaView from 'react-native-safe-area-view';
 import {observer, inject} from 'mobx-react';
@@ -12,7 +12,7 @@ import {
   ScreenContentHeaderText,
 } from '../../components';
 import fontStyles from '../../styles/fontStyles';
-import AppStore from '../../store/AppStore';
+import {colors} from '../../styles';
 
 const LoginScreen: DrawerScreenType<'Login'> = ({navigation, route}) => {
   const [email, setEmail] = useState('');
@@ -21,10 +21,9 @@ const LoginScreen: DrawerScreenType<'Login'> = ({navigation, route}) => {
   useEffect(() => {}, []);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.appColors.white}}>
       <MainScreenView style={styles.container}>
         <ScreenContentHeaderText title={'Kullanıcı Girişi'} />
-        <Separator marginBottom={40} hasHeight={false} />
         <Card>
           <TextInput
             containerViewStyle={{}}

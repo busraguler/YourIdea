@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {color} from 'react-native-reanimated';
 import {colors} from '../../styles';
 
 interface NavigationHeaderProps extends ViewProps {
@@ -63,7 +62,7 @@ export default NavigationHeader;
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    backgroundColor: 'white',
+    backgroundColor: colors.appColors.white,
     width: '100%',
     height: 50,
     justifyContent: 'space-between',
