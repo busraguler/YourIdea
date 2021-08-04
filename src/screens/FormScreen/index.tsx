@@ -18,50 +18,34 @@ const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [profession, setProfession] = useState('');
-  const [formValidation, setFormValidation] = useState(true);
-  const [errorMessage, setErrorMessage] = useState({
-    name: '',
-    content: '',
-    profession: '',
-  });
+  const [nameValidation, setNameValidation] = useState(false);
+  const [contentValidation, setContentValidation] = useState(false);
+  const [professionValidation, setProfessionValidation] = useState(false);
 
   useEffect(() => {
-    setErrorMessage({name: '', content: '', profession: ''});
-    if (name != '' && name.length < 2) {
-      setErrorMessage({
-        ...errorMessage,
-        name: 'Lütfen en az 2 karakter giriniz.',
-      });
-      setFormValidation(false);
-    }
-    if (content != '' && content.length > 200) {
-      setErrorMessage({
-        ...errorMessage,
-        content: 'Lütfen 200 karekteri geçmeyiniz.',
-      });
-      setFormValidation;
-      false;
-    }
+    setNameValidation(false);
+    setContentValidation(false);
+    setProfessionValidation(false);
   }, [name, content, profession]);
 
   const sumbitForm = () => {
-    let nameError = false;
-    name == '' ? (nameError = true) : false;
+    let valid = true;
+    if (name === '') {
+      setNameValidation(true);
+      valid = false;
+    }
+    if (content === '') {
+      setContentValidation(true);
+      valid = false;
+    }
 
-    let contentError = false;
-    content == '' ? (contentError = true) : false;
+    if (profession === '') {
+      setProfessionValidation(true);
+      valid = false;
+    }
 
-    let professionError = false;
-    profession == '' ? (professionError = true) : false;
-
-    setErrorMessage({
-      content: contentError ? 'Bu alan doldurulmalı.' : '',
-      name: nameError ? 'Bu alan doldurulmalı.' : '',
-      profession: professionError ? 'Bu alan doldurulmalı.' : '',
-    });
-
-    if (!nameError && !contentError && !professionError && formValidation) {
-      navigation.navigate('Comments');
+    if (valid) {
+      navigation.navigate('Home');
     }
   };
 
@@ -95,7 +79,13 @@ const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
               }}
               placeholder={'Adınız'}
               value={name}
-              errorMessage={errorMessage.name != '' && errorMessage.name}
+              errorMessage={
+                nameValidation
+                  ? 'Bu alan boş kalamaz.'
+                  : name.length <= 2 && name != ''
+                  ? 'Adınız en az 2 karakterden oluşmalıdır.'
+                  : null
+              }
               onChangeText={name => setName(name)}
             />
             <TextInput
@@ -106,7 +96,7 @@ const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
               placeholder={'Mesleğiniz'}
               value={profession}
               errorMessage={
-                errorMessage.profession != '' && errorMessage.profession
+                professionValidation ? 'Bu alan boş kalamaz.' : null
               }
               onChangeText={profession => setProfession(profession)}
             />
@@ -119,7 +109,13 @@ const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
               textStyle={{
                 ...fontStyles.normalText,
               }}
-              errorMessage={errorMessage.content != '' && errorMessage.content}
+              errorMessage={
+                contentValidation
+                  ? 'Bu alan boş kalamaz.'
+                  : content.length > 200
+                  ? 'Öneriler 200 karakteri geçmemelidir.'
+                  : null
+              }
               placeholder={'Önerileriniz'}
               value={content}
               onChangeText={content => setContent(content)}

@@ -8,70 +8,76 @@ import {
   ScreenContentHeaderText,
   Loading,
 } from '../../components';
+import {observer} from 'mobx-react';
 import fontStyles from '../../styles/fontStyles';
 import NavigationHeader from '../../navigation/NavigationHeader';
 import CommentItem from './CommentItem';
 import {colors} from '../../styles';
+import AppStore from '../../store/AppStore';
 
-const CommentsScreen: DrawerScreenType<'Comments'> = ({navigation, route}) => {
-  const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
+const CommentsScreen: DrawerScreenType<'Comments'> = observer(
+  ({navigation, route}) => {
+    const [loading, setLoading] = useState(true);
+    const [comments, setComments] = useState([]);
 
-  useEffect(() => {
-    getCommentsApi();
-  }, []);
+    useEffect(() => {
+      getCommentsApi();
+    }, []);
 
-  const getCommentsApi = async () => {
-    try {
-      const response = await fetch(
-        'https://opencollective.com/sustainoss/events.json?limit=10&offset=0',
-      );
-      const json = await response.json();
-      setComments(json);
-      setLoading(false);
-      return json;
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const getCommentsApi = async () => {
+      try {
+        const response = await fetch(
+          'https://opencollective.com/sustainoss/events.json?limit=10&offset=0',
+        );
+        const json = await response.json();
+        setComments(json);
+        setLoading(false);
+        return json;
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.appColors.white}}>
-      <ScrollView>
-        <NavigationHeader
-          isLeftIcon={true}
-          onPressLeftIcon={() => navigation.navigate('Home')}
-          title={'Form'}
-          isRightIcon={true}
-          onPressRightIcon={() => navigation.navigate('Home')}
-        />
-        <MainScreenView style={styles.container}>
-          <ScreenContentHeaderText title={'Yorumlar'} />
-          <Loading loading={loading} />
-          <Card>
-            {comments &&
-              comments.length > 0 &&
-              comments.map((item, key) => {
-                return (
-                  <TouchableOpacity
-                    key={key}
-                    onPress={() =>
-                      navigation.navigate('CommentDetail', {name: 'item.name'})
-                    }>
-                    <CommentItem
-                      name={item.name}
-                      description={item.description}
-                      imageLink={item.image}
-                    />
-                  </TouchableOpacity>
-                );
-              })}
-          </Card>
-        </MainScreenView>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: colors.appColors.white}}>
+        <ScrollView>
+          <NavigationHeader
+            isLeftIcon={true}
+            onPressLeftIcon={() => navigation.navigate('Home')}
+            title={'Form'}
+            isRightIcon={true}
+            onPressRightIcon={() => navigation.navigate('Home')}
+          />
+          <MainScreenView style={styles.container}>
+            <ScreenContentHeaderText title={'Yorumlar'} />
+            <Loading loading={loading} />
+            <Card>
+              {comments &&
+                comments.length > 0 &&
+                comments.map((item, key) => {
+                  return (
+                    <TouchableOpacity
+                      key={key}
+                      onPress={() => (
+                        (AppStore.commentContent = item.description),
+                        (AppStore.commentName = item.name),
+                        navigation.navigate('CommentDetail')
+                      )}>
+                      <CommentItem
+                        name={item.name}
+                        description={item.description}
+                        imageLink={item.image}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+            </Card>
+          </MainScreenView>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   container: {
