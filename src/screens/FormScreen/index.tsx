@@ -121,7 +121,7 @@ const FormScreen: DrawerScreenType<'Form'> = ({navigation, route}) => {
               onChangeText={content => setContent(content)}
             />
             <Separator marginBottom={40} hasHeight={false} />
-            <SubmitButton text={'Kaydet'} onPress={() => sumbitForm()} />
+            <SubmitButton text={'Gönder'} onPress={() => sumbitForm()} />
           </Card>
         </MainScreenView>
       </ScrollView>
